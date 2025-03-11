@@ -1,21 +1,3 @@
-// import Sidebar from "@/components/Sidebar";
-
-// export default function DashboardLayout({ children }: { children: React.ReactNode }) {
-//     return (
-//       <div className="flex h-screen">
-//         {/* Sidebar */}
-//         <div className="w-72 bg-gray-900 text-white p-5">
-//           <Sidebar />
-//         </div>
-  
-//         {/* Page Content */}
-//         <div className="flex-1 p-6">{children}</div>
-//       </div>
-//     );
-//   }
-  
-
-"use client"
 "use client";
 import { useState, useEffect } from "react";
 import Sidebar from "@/components/Sidebar";

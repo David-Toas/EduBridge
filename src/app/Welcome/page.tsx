@@ -37,7 +37,7 @@ const GetStarted: React.FC = () => {
   }, []);
 
   return (
-    <div className="h-screen flex flex-col bg-black text-white overflow-auto">
+    <div className="h-screen flex flex-col bg-[#F3F4F6] text-white overflow-auto">
       {/* Logo at the top */}
       <div className="w-full py-4 px-6 flex items-center">
         <img src="/logo.png" alt="logo" className="w-24" />
@@ -54,13 +54,13 @@ const GetStarted: React.FC = () => {
             >
               {carouselItems.map((item, index) => (
                 <CarouselItem key={index} className="w-full flex-shrink-0">
-                  <div className=" bg-black text-center">
+                  <div className=" bg-[#F3F4F6] text-center p-6">
                     <img
                       src={item.image}
                       alt={item.alt}
                       className="w-full max-h-[450px] object-cover rounded-md"
                     />
-                    <h2 className="text-lg font-semibold mt-4">{item.title}</h2>
+                    <h2 className="text-lg font-semibold mt-4 text-[#1E293B]">{item.title}</h2>
                     <p className="text-sm text-gray-400">{item.description}</p>
                   </div>
                 </CarouselItem>
@@ -74,7 +74,7 @@ const GetStarted: React.FC = () => {
               <span
                 key={index}
                 className={`h-3 w-3 rounded-full transition-all duration-300 ${
-                  currentIndex === index ? "bg-blue-600 w-5" : "bg-gray-400"
+                  currentIndex === index ? "bg-[#7E22CE] w-5" : "bg-gray-400"
                 }`}
               ></span>
             ))}
@@ -85,7 +85,7 @@ const GetStarted: React.FC = () => {
       {/* Get Started Button (Bottom, Centered) */}
       <div className="w-full flex justify-center py-6">
         
-        <Button className="bg-blue-600 text-white px-6 py-3 rounded-lg animate-pulse uppercase">
+        <Button className="bg-[#FACC15] hover:bg-[#3B82F6] text-black font-semibold px-6 py-3 rounded-lg animate-pulse hover:animate-none uppercase">
         <a href="/login">
 
           Get Started

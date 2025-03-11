@@ -1,6 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 /* eslint-disable react/no-unescaped-entities */
 /* eslint-disable @next/next/no-html-link-for-pages */
+import Link from "next/link";
 import React from "react";
 
 function Login() {
@@ -68,15 +69,15 @@ function Login() {
                       type="checkbox"
                       className="transform scale-110 focus:outline-none"
                     />
-                    <span> Remember for 30 days</span>
+                    <span> Remember Me</span>
                   </label>
-                  <a href="#/ms/password-reset" className="text-indigo-600">
+                  <Link href="/" className="text-indigo-600">
                     Forgot password?
-                  </a>
+                  </Link>
                 </div>
 
-                <button className="flex items-center justify-center px-3 space-x-2 text-white transition duration-200 transform rounded-md shadow-sm hover:shadow-md bg-gradient-to-r from-[#f59e0b] via-[#ea580c] to-[#b91c1c] py-3 mt-5 w-full font-medium">
-                  <a href="/">
+                <button className="flex items-center justify-center px-3 space-x-2 text-white transition duration-500 transform rounded-md shadow-sm hover:shadow-md bg-[#82239d] hover:bg-[#89CFF0] hover:text-black py-3 mt-5 w-full font-medium">
+                  <a href="/dashboard">
                     <span>Sign in</span>
                   </a>
                 </button>
@@ -86,9 +87,9 @@ function Login() {
                 Don't have an account?{" "}
                 <a
                   href="/signup"
-                  className="text-indigo-600 hover:text-indigo-900 font-semibold"
+                  className="text-indigo-600 hover:text-indigo-900 font-semibold ml-1"
                 >
-                  Sign up risk-free
+                  Sign Up 
                 </a>
               </section>
             </div>
@@ -97,7 +98,7 @@ function Login() {
           {/* Right Side - Image */}
           <div className="w-full h-full hidden md:block">
             <img
-              src="https://i.imgur.com/yEV3n4F.jpg"
+              src="/1.jpg"
               className="w-full h-full object-cover"
               alt="Login Side Image"
             />

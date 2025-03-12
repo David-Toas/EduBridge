@@ -114,8 +114,8 @@ const Sidebar = ({
                 ))}
               </ul>
             </nav>
-            
-            <div className="border-t border-[#FACC15] mx-3 mb-6" />
+
+            <div className="border-t border-[#FACC15] mx-3 my-8" />
             {/* logout */}
             <div className="mt-8 px-3">
               <button

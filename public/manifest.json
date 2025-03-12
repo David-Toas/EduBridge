@@ -1,0 +1,22 @@
+{
+  "name": "EduBridge",
+  "short_name": "EduBridge",
+  "description": "Your app description",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#3b82f6",
+  "icons": [
+    {
+      "src": "/pic1.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/pic2.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

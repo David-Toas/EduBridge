@@ -29,7 +29,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
   return (
     <div className="flex h-screen relative">
       {/* Sidebar container - desktop/tablet */}
-      <div className={`transition-all duration-300 bg-gray-900 text-white ${
+      <div className={`transition-all duration-300  text-white ${
         isMobile ? 'hidden' : (isSidebarExpanded ? 'w-64' : 'w-16')
       }`}>
         <Sidebar 
@@ -40,7 +40,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
       </div>
   
       {/* Page Content */}
-      <div className={`flex-1 p-6 ${isMobile ? 'pb-24' : ''}`}>
+      <div className={`flex-1 p-6 bg-[#D1D5DB] ${isMobile ? 'pb-24' : ''}`}>
         {children}
       </div>
 

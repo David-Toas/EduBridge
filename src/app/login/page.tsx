@@ -16,7 +16,7 @@ function Login() {
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 20 20"
                 fill="currentColor"
-                className="h-7 w-7 opacity-50"
+                className="h-7 w-7 hover:text-[#D1D5DB] text-[#FACC15]"
               >
                 <path
                   fillRule="evenodd"
@@ -29,7 +29,7 @@ function Login() {
 
           {/* Left Side - Login Form */}
           <div className="flex items-center justify-center h-full px-6 md:px-12">
-            <div className="w-full max-w-md bg-white p-8 shadow-lg rounded-md">
+            <div className="w-full max-w-md bg-[#D1D5DB] p-8 shadow-lg rounded-md">
               <form data-ms-form="login">
                 <h2 className="text-3xl text-gray-800 font-bold">Welcome back</h2>
 

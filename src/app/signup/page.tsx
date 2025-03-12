@@ -12,7 +12,7 @@ const SignupForm: React.FC = () => {
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 h-screen w-full font-display tracking-tight relative transition duration-150">
       <div className="flex justify-center items-center h-full">
-        <div className="w-4/5 md:w-3/4 lg:w-3/5 xl:w-1/2 mx-auto bg-white">
+        <div className="w-full max-w-md bg-[#D1D5DB] p-8 shadow-lg rounded-md">
           <form className="relative">
             <h2 className="text-3xl text-gray-800 font-bold">
               Create an account

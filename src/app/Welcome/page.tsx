@@ -12,13 +12,13 @@ const carouselItems = [
     description: "Your Learning Adventure Begins!",
   },
   {
-    image: "/pic2.png",
+    image: "/2t.jpg",
     alt: "Accessibility",
     title: "What Do You Want to Learn?",
     description: "Let us help you find the best courses for your goals.",
   },
   {
-    image: "/pic3.png",
+    image: "/pic3.jpg",
     alt: "Skills",
     title: "Learn Your Way!",
     description: "With Edubridge, you control your learning pace, wherever you are.",
@@ -37,11 +37,11 @@ const GetStarted: React.FC = () => {
   }, []);
 
   return (
-    <div className="h-screen flex flex-col bg-[#F3F4F6] text-white overflow-auto">
+    <div className="h-screen flex flex-col text-white overflow-auto">
       {/* Logo at the top */}
-      <div className="w-full py-4 px-6 flex items-center">
+      <div className="w-full pt-4 px-6 flex items-center">
         <img src="/logo.png" alt="logo" className="w-24" />
-        <h1 className="text-2xl font-bold bg-gradient-to-b from-yellow-800 via-yellow-500 to-yellow-300 bg-clip-text text-transparent">EduBridge</h1>
+        <h1 className="text-2xl font-bold bg-gradient-to-t from-[#b58f52] via-yellow-500 to-[#e7ca86] bg-clip-text text-transparent">EduBridge</h1>
       </div>
 
       {/* Carousel Section (Responsive Centered) */}
@@ -54,13 +54,13 @@ const GetStarted: React.FC = () => {
             >
               {carouselItems.map((item, index) => (
                 <CarouselItem key={index} className="w-full flex-shrink-0">
-                  <div className=" bg-[#F3F4F6] text-center p-6">
+                  <div className=" bg-transparent rounded-md text-center p-6">
                     <img
                       src={item.image}
                       alt={item.alt}
-                      className="w-full max-h-[450px] object-cover rounded-md"
+                      className="w-full max-h-[600px] object-cover rounded-md"
                     />
-                    <h2 className="text-lg font-semibold mt-4 text-[#1E293B]">{item.title}</h2>
+                    <h2 className="text-lg font-semibold mt-4 text-[#e4e6ea]">{item.title}</h2>
                     <p className="text-sm text-gray-400">{item.description}</p>
                   </div>
                 </CarouselItem>
@@ -74,7 +74,7 @@ const GetStarted: React.FC = () => {
               <span
                 key={index}
                 className={`h-3 w-3 rounded-full transition-all duration-300 ${
-                  currentIndex === index ? "bg-[#7E22CE] w-5" : "bg-gray-400"
+                  currentIndex === index ? "bg-[#FACC15] w-5" : "bg-[#7E22CE]"
                 }`}
               ></span>
             ))}
@@ -85,7 +85,7 @@ const GetStarted: React.FC = () => {
       {/* Get Started Button (Bottom, Centered) */}
       <div className="w-full flex justify-center py-6">
         
-        <Button className="bg-[#FACC15] hover:bg-[#3B82F6] text-black font-semibold px-6 py-3 rounded-lg animate-pulse hover:animate-none uppercase">
+        <Button className="bg-[#FACC15] hover:bg-[#82239D] text-black font-bold px-12 py-8 rounded-lg animate-pulse hover:animate-none uppercase">
         <a href="/login">
 
           Get Started

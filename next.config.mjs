@@ -1,9 +1,3 @@
-// /** @type {import('next').NextConfig} */
-// const nextConfig = {};
-
-// export default nextConfig;
-
-
 import withPWA from 'next-pwa';
 
 const pwa = withPWA({
@@ -14,6 +8,15 @@ const pwa = withPWA({
 });
 
 /** @type {import('next').NextConfig} */
-const nextConfig = {};
+const nextConfig = {
+  async rewrites() {
+    return [
+      {
+        source: '/api/:path*',
+        destination: 'https://edubridge-uwk9.onrender.com/api/:path*',
+      },
+    ];
+  },
+};
 
 export default pwa(nextConfig);

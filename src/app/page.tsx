@@ -9,13 +9,6 @@ export default function Home() {
     router.push("/Welcome");
   }, [router]);
 
-//   useEffect(() => {
-//   if ("serviceWorker" in navigator) {
-//     navigator.serviceWorker.register("/service-worker.js")
-//       .then(() => console.log("Service Worker Registered"));
-//   }
-// }, []);
-
 
   return null;
 }

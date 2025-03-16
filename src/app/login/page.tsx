@@ -1,10 +1,49 @@
-/* eslint-disable @next/next/no-img-element */
 /* eslint-disable react/no-unescaped-entities */
-/* eslint-disable @next/next/no-html-link-for-pages */
+/* eslint-disable @next/next/no-img-element */
+"use client";
+
 import Link from "next/link";
-import React from "react";
+import React, { useState } from "react";
+import { useRouter } from "next/navigation";
+import { Loader2 } from "lucide-react";
 
 function Login() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState("");
+  const router = useRouter();
+
+  const handleSubmit = async (e: { preventDefault: () => void; }) => {
+    e.preventDefault();
+    setIsLoading(true);
+    setError("");
+
+    try {
+      const response = await fetch("/api/v1/log/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, password })
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.message || "Login failed");
+      }
+
+      // Store token in localStorage
+      localStorage.setItem("token", data.token);
+      
+      // Redirect to dashboard
+      router.push("/dashboard");
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'An error occurred');
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   return (
     <div id="__nuxt">
       <div id="__layout">
@@ -30,8 +69,14 @@ function Login() {
           {/* Left Side - Login Form */}
           <div className="flex items-center justify-center h-full px-6 md:px-12">
             <div className="w-full max-w-md bg-[#D1D5DB] p-8 shadow-lg rounded-md">
-              <form data-ms-form="login">
+              <form onSubmit={handleSubmit}>
                 <h2 className="text-3xl text-gray-800 font-bold">Welcome back</h2>
+                
+                {error && (
+                  <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mt-4" role="alert">
+                    <span className="block sm:inline">{error}</span>
+                  </div>
+                )}
 
                 <div className="mt-4">
                   <label
@@ -42,9 +87,11 @@ function Login() {
                   </label>
                   <input
                     id="email"
-                    data-ms-member="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
                     className="border w-full px-4 py-2 rounded-md transition duration-150 focus:ring-2 focus:ring-gray-700 focus:outline-none"
-                    type="text"
+                    type="email"
+                    required
                   />
                 </div>
 
@@ -58,8 +105,10 @@ function Login() {
                   <input
                     type="password"
                     id="password"
-                    data-ms-member="password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
                     className="border w-full px-4 py-2 rounded-md transition duration-150 focus:ring-2 focus:ring-gray-700 focus:outline-none"
+                    required
                   />
                 </div>
 
@@ -71,26 +120,28 @@ function Login() {
                     />
                     <span> Remember Me</span>
                   </label>
-                  <Link href="/" className="text-indigo-600">
+                  <Link href="/forgot-password" className="text-indigo-600">
                     Forgot password?
                   </Link>
                 </div>
 
-                <button className="flex items-center justify-center px-3 space-x-2 text-white transition duration-500 transform rounded-md shadow-sm hover:shadow-md bg-[#82239d] hover:bg-[#89CFF0] hover:text-black py-3 mt-5 w-full font-medium">
-                  <a href="/dashboard">
-                    <span>Sign in</span>
-                  </a>
+                <button 
+                  type="submit"
+                  disabled={isLoading}
+                  className="flex items-center justify-center px-3 space-x-2 text-white transition duration-500 transform rounded-md shadow-sm hover:shadow-md bg-[#82239d] hover:bg-[#89CFF0] hover:text-black py-3 mt-5 w-full font-medium"
+                >
+                  {isLoading ? (<><Loader2 className="animate-none mr-2"/> Signing in...</>) : "Sign in"}
                 </button>
               </form>
 
               <section className="w-full pt-4 text-sm text-gray-700 text-center">
                 Don't have an account?{" "}
-                <a
+                <Link
                   href="/signup"
                   className="text-indigo-600 hover:text-indigo-900 font-semibold ml-1"
                 >
                   Sign Up 
-                </a>
+                </Link>
               </section>
             </div>
           </div>

@@ -211,9 +211,9 @@ const Sidebar = ({
                     {isSidebarExpanded && (
                       <span>
                         {academicsOpen ? (
-                          <ChevronDown size={16} />
+                          <ChevronDown size={16} className="mr-4"/>
                         ) : (
-                          <ChevronRight size={16} />
+                          <ChevronRight size={16} className="mr-4"/>
                         )}
                       </span>
                     )}

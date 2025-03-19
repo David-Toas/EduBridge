@@ -21,12 +21,16 @@ function Login() {
 
     try {
       const response = await fetch("/api/v1/log/login", {
+        // const response = await fetch("https://edubridge-uwk9.onrender.com/api/v1/log/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password })
       });
 
+      // const data = await response.json();
       const data = await response.json();
+console.log("Login response data:", data);
+
 
       if (!response.ok) {
         throw new Error(data.message || "Login failed");

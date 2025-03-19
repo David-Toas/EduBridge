@@ -98,8 +98,9 @@ const Sidebar = ({
   ];
 
   const handleLogout = () => {
-    // Add your logout logic here
-    window.location.href = "/";
+    localStorage.removeItem("token");
+    localStorage.removeItem("userId");
+    window.location.href = "/login";
   };
 
   const isAcademicsActive = (pathname ?? "").includes("/dashboard/academics");
@@ -151,8 +152,8 @@ const Sidebar = ({
               <Image
                 src="/logo.png"
                 alt="Logo"
-                width={isSidebarExpanded ? 80 : 32}
-                height={isSidebarExpanded ? 80 : 32}
+                width={isSidebarExpanded ? 350 : 32}
+                height={isSidebarExpanded ? 350 : 32}
               />
             </div>
           </div>

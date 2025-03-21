@@ -94,11 +94,11 @@ const SignupForm: React.FC = () => {
     // Create a payload with username added
     const payload = {
       ...formData,
-      username: formData.last_name  // Set username equal to last_name based on the error message
+      username: formData.last_name  
     };
   
     // Log the data being sent
-    console.log("Sending data:", payload);
+    // console.log("Sending data:", payload);
   
     try {
       setLoading(true);
@@ -111,7 +111,7 @@ const SignupForm: React.FC = () => {
       // Get the full response text
       const responseText = await response.text();
       console.log("Response status:", response.status);
-      console.log("Response text:", responseText);
+      // console.log("Response text:", responseText);
   
       // Try to parse as JSON if possible
       let data;

@@ -88,10 +88,10 @@ const Dashboard = () => {
       const response = await axios.get(`${baseURL}/user/one/${userId}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
-      console.log("User Data Response:", response.data);
+      // console.log("User Data Response:", response.data);
       // setUser(response.data.data);
       setUser(response.data.data || {});
-      console.log("Raw user data:", response.data);
+      // console.log("Raw user data:", response.data);
     } catch (err) {
       console.error("Error fetching user data:", err);
       setError("Failed to fetch user data.");
@@ -145,7 +145,7 @@ const Dashboard = () => {
       
       // Process the results safely
       if (results[0].status === 'fulfilled') {
-        console.log("Courses response:", results[0].value);
+        // console.log("Courses response:", results[0].value);
         setCourses(Array.isArray(results[0].value.data) ? results[0].value.data : 
                    (Array.isArray(results[0].value.data.data) ? results[0].value.data.data : []));
       }

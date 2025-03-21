@@ -40,7 +40,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
       </div>
   
       {/* Page Content */}
-      <div className={`flex-1 p-6 bg-[#D1D5DB] ${isMobile ? 'pb-24' : ''}`}>
+      <div className={`flex-1 p-4 bg-[#D1D5DB] ${isMobile ? 'pb-24' : ''}`}>
         {children}
       </div>
 

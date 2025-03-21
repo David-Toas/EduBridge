@@ -38,6 +38,18 @@ console.log("Login response data:", data);
 
       // Store token in localStorage
       localStorage.setItem("token", data.token);
+
+      if (data.user && data.user.id) {
+        localStorage.setItem("userId", data.user.id);
+      } else if (data.userId) {
+        localStorage.setItem("userId", data.userId);
+      } else if (data.id) {
+        localStorage.setItem("userId", data.id);
+      } else if (data.data && data.data.id) {
+        localStorage.setItem("userId", data.data.id);
+      } else {
+        console.error("User ID not found in response:", data);
+      }
       
       // Redirect to dashboard
       router.push("/dashboard");

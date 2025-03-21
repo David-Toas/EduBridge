@@ -10,6 +10,7 @@ import {
   ChevronRight,
   BookOpen,
   GraduationCap,
+  Brain,
   // Calendar
 } from "lucide-react";
 import Link from "next/link";
@@ -77,11 +78,11 @@ const Sidebar = ({
       href: "/dashboard/academics/secondary",
       icon: <GraduationCap size={16} />,
     },
-    // {
-    //   name: "SCHEDULE",
-    //   href: "/dashboard/academics/schedule",
-    //   icon: <Calendar size={16} />,
-    // },
+    {
+      name: "SOFT SKILLS",
+      href: "/dashboard/academics/soft_skills",
+      icon: <Brain size={16} />,
+    },
   ];
 
   const links = [

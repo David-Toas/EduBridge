@@ -28,8 +28,13 @@ function Login() {
       });
 
       // const data = await response.json();
-      const data = await response.json();
-console.log("Login response data:", data);
+//       const data = await response.json();
+// console.log("Login response data:", data);
+
+
+const data = await response.json();
+console.log("Login response data:", JSON.stringify(data, null, 2));
+
 
 
       if (!response.ok) {
@@ -37,7 +42,7 @@ console.log("Login response data:", data);
       }
 
       // Store token in localStorage
-      localStorage.setItem("token", data.token);
+      localStorage.setItem("token", data.data.token);
 
       if (data.user && data.user.id) {
         localStorage.setItem("userId", data.user.id);
@@ -47,9 +52,15 @@ console.log("Login response data:", data);
         localStorage.setItem("userId", data.id);
       } else if (data.data && data.data.id) {
         localStorage.setItem("userId", data.data.id);
+      } else if (data.data && data.data.user && data.data.user.id) {
+        localStorage.setItem("userId", data.data.user.id);
       } else {
-        console.error("User ID not found in response:", data);
+        // Log more info to see the exact structure
+        console.error("User ID not found in response:", JSON.stringify(data, null, 2));
       }
+
+      const tokenPayload = JSON.parse(atob(data.data.token.split('.')[1]));
+localStorage.setItem("userId", tokenPayload.id);
       
       // Redirect to dashboard
       router.push("/dashboard");

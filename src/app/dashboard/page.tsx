@@ -90,7 +90,7 @@ const Dashboard = () => {
       });
       console.log("User Data Response:", response.data);
       // setUser(response.data.data);
-      setUser(response.data || {});
+      setUser(response.data.data || {});
       console.log("Raw user data:", response.data);
     } catch (err) {
       console.error("Error fetching user data:", err);
@@ -145,7 +145,9 @@ const Dashboard = () => {
       
       // Process the results safely
       if (results[0].status === 'fulfilled') {
-        setCourses(results[0].value.data.data || []);
+        console.log("Courses response:", results[0].value);
+        setCourses(Array.isArray(results[0].value.data) ? results[0].value.data : 
+                   (Array.isArray(results[0].value.data.data) ? results[0].value.data.data : []));
       }
       
       if (results[1].status === 'fulfilled') {
@@ -216,7 +218,7 @@ const Dashboard = () => {
     <div className="p-6 bg-gray-100 min-h-full rounded-lg">
       <div className="mb-6">
         <h1 className="text-2xl font-bold text-gray-800">
-          Welcome, {user?.first_name || "User"} 👋
+        Welcome, {user && user.first_name ? user.first_name : "User"} 👋
         </h1>
         <p className="text-gray-600">
           Explore available courses and start learning.

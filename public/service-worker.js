@@ -4,7 +4,7 @@ const urlsToCache = [
   '/index.html',
   '/manifest.json',
   // Add other important assets (CSS, JS, images)
-  '/favicon.ico'
+  '/logo.ico'
 ];
 
 // Install and cache assets

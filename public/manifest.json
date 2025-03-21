@@ -1,20 +1,20 @@
 {
   "name": "EduBridge",
   "short_name": "EduBridge",
-  "description": "Your app description",
+  "description": "An educational website designed to provide learners with access to high-quality courses, resources, and tools to enhance their skills and knowledge across various subjects. Tailored for students, professionals, and lifelong learners, it offers an engaging and interactive platform for seamless learning anytime, anywhere.",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#ffffff",
   "theme_color": "#3b82f6",
   "icons": [
     {
-      "src": "/pic1.png",
+      "src": "/logo.png",
       "sizes": "192x192",
       "type": "image/png",
       "purpose": "any maskable"
     },
     {
-      "src": "/pic2.png",
+      "src": "/logo.png",
       "sizes": "512x512",
       "type": "image/png"
     }

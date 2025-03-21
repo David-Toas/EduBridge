@@ -33,7 +33,7 @@ function Login() {
 
 
 const data = await response.json();
-console.log("Login response data:", JSON.stringify(data, null, 2));
+// console.log("Login response data:", JSON.stringify(data, null, 2));
 
 
 
@@ -56,7 +56,7 @@ console.log("Login response data:", JSON.stringify(data, null, 2));
         localStorage.setItem("userId", data.data.user.id);
       } else {
         // Log more info to see the exact structure
-        console.error("User ID not found in response:", JSON.stringify(data, null, 2));
+        // console.error("User ID not found in response:", JSON.stringify(data, null, 2));
       }
 
       const tokenPayload = JSON.parse(atob(data.data.token.split('.')[1]));
@@ -157,7 +157,7 @@ localStorage.setItem("userId", tokenPayload.id);
                   disabled={isLoading}
                   className="flex items-center justify-center px-3 space-x-2 text-white transition duration-500 transform rounded-md shadow-sm hover:shadow-md bg-[#82239d] hover:bg-[#89CFF0] hover:text-black py-3 mt-5 w-full font-medium"
                 >
-                  {isLoading ? (<><Loader2 className="animate-none mr-2"/> Signing in...</>) : "Sign in"}
+                  {isLoading ? (<><Loader2 className="animate-spin mr-2"/> Signing in...</>) : "Sign in"}
                 </button>
               </form>
 

@@ -9,11 +9,8 @@ export default function PWAInstallPrompt() {
 
   useEffect(() => {
     const handleBeforeInstallPrompt = (e: Event) => {
-      // Prevent Chrome 76+ from automatically showing the prompt
       e.preventDefault();
-      // Stash the event so it can be triggered later
       setDeferredPrompt(e);
-      // Show the install button
       setShowPrompt(true);
     };
 
@@ -27,17 +24,14 @@ export default function PWAInstallPrompt() {
   const handleInstallClick = () => {
     if (!deferredPrompt) return;
 
-    // Show the install prompt
     deferredPrompt.prompt();
 
-    // Wait for the user to respond to the prompt
     deferredPrompt.userChoice.then((choiceResult: {outcome: string}) => {
       if (choiceResult.outcome === 'accepted') {
         console.log('User accepted the install prompt');
       } else {
         console.log('User dismissed the install prompt');
       }
-      // We no longer need the prompt. Clear it up
       setDeferredPrompt(null);
       setShowPrompt(false);
     });

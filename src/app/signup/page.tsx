@@ -30,89 +30,37 @@ const SignupForm: React.FC = () => {
     }));
   };
 
-  // const handleSubmit = async (e: React.FormEvent) => {
-  //   e.preventDefault();
-  //   setError("");
-
-  //   // Simple validation
-  //   if (formData.password !== formData.confirm_password) {
-  //     setError("Passwords do not match");
-  //     return;
-  //   }
-
-  //   // Log the data being sent
-  //   console.log("Sending data:", formData);
-
-  //   try {
-  //     setLoading(true);
-  //     // const response = await fetch("/api/v1/user/register", {
-  //       const response = await fetch("https://edubridge-uwk9.onrender.com/api/v1/user/register", {
-  //       method: "POST",
-  //       headers: { "Content-Type": "application/json" },
-  //       body: JSON.stringify(formData),
-  //     });
-
-  //     // Get the full response text
-  //     const responseText = await response.text();
-  //     console.log("Response status:", response.status);
-  //     console.log("Response text:", responseText);
-
-  //     // Try to parse as JSON if possible
-  //     let data;
-  //     try {
-  //       data = JSON.parse(responseText);
-  //     } catch (e) {
-  //       data = { message: responseText };
-  //     }
-
-  //     if (!response.ok) {
-  //       throw new Error(
-  //         data.message || `Registration failed with status ${response.status}`
-  //       );
-  //     }
-
-  //     // Switch to verification mode
-  //     setVerificationMode(true);
-  //   } catch (err: any) {
-  //     console.error("Error details:", err);
-  //     setError(err.message || "An error occurred during registration");
-  //   } finally {
-  //     setLoading(false);
-  //   }
-  // };
-
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError("");
-  
+
     // Simple validation
     if (formData.password !== formData.confirm_password) {
       setError("Passwords do not match");
       return;
     }
-  
+
     // Create a payload with username added
     const payload = {
       ...formData,
-      username: formData.last_name  
+      username: formData.last_name,
     };
-  
-    // Log the data being sent
-    // console.log("Sending data:", payload);
-  
+
     try {
       setLoading(true);
-      const response = await fetch("https://edubridge-uwk9.onrender.com/api/v1/user/register", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload),  // Use payload instead of formData
-      });
-  
+      const response = await fetch(
+        "https://edubridge-uwk9.onrender.com/api/v1/user/register",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload), // Use payload instead of formData
+        }
+      );
+
       // Get the full response text
       const responseText = await response.text();
       console.log("Response status:", response.status);
-      // console.log("Response text:", responseText);
-  
+
       // Try to parse as JSON if possible
       let data;
       try {
@@ -120,13 +68,13 @@ const SignupForm: React.FC = () => {
       } catch (e) {
         data = { message: responseText };
       }
-  
+
       if (!response.ok) {
         throw new Error(
           data.message || `Registration failed with status ${response.status}`
         );
       }
-  
+
       // Switch to verification mode
       setVerificationMode(true);
     } catch (err: any) {
@@ -137,22 +85,23 @@ const SignupForm: React.FC = () => {
     }
   };
 
-
   const handleVerify = async (e: React.FormEvent) => {
     e.preventDefault();
     setError("");
 
     try {
       setLoading(true);
-      // const response = await fetch("/api/v1/user/verify", {
-        const response = await fetch("https://edubridge-uwk9.onrender.com/api/v1/user/verify", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          email: formData.email,
-          code: verificationCode,
-        }),
-      });
+      const response = await fetch(
+        "https://edubridge-uwk9.onrender.com/api/v1/user/verify",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            email: formData.email,
+            code: verificationCode,
+          }),
+        }
+      );
 
       const data = await response.json();
 
@@ -172,12 +121,14 @@ const SignupForm: React.FC = () => {
   const resendVerificationCode = async () => {
     try {
       setLoading(true);
-      // const response = await fetch("/api/v1/user/resendcode", {
-        const response = await fetch("https://edubridge-uwk9.onrender.com/api/v1/user/resendcode", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email: formData.email }),
-      });
+      const response = await fetch(
+        "https://edubridge-uwk9.onrender.com/api/v1/user/resendcode",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ email: formData.email }),
+        }
+      );
 
       const data = await response.json();
 

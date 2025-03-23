@@ -23,7 +23,6 @@ const Page = () => {
   const fetchCourses = async () => {
     setLoading(true);
     try {
-      // Always fetch only primary courses
       const url =
   "https://edubridge-uwk9.onrender.com/api/v1/course/all?category=curriculum";
 

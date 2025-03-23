@@ -31,7 +31,7 @@ const GetStarted: React.FC = () => {
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentIndex((prevIndex) => (prevIndex + 1) % carouselItems.length);
-    }, 5000); // Change slide every 3 seconds
+    }, 5000); 
 
     return () => clearInterval(interval);
   }, []);

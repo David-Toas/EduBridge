@@ -11,7 +11,6 @@ import {
   BookOpen,
   GraduationCap,
   Brain,
-  // Calendar
 } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -36,7 +35,6 @@ const Sidebar = ({
 
   const toggleSidebar = () => {
     setIsSidebarExpanded(!isSidebarExpanded);
-    // Close mini dropdown when expanding sidebar
     if (!isSidebarExpanded) {
       setShowMiniDropdown(false);
     }
@@ -50,7 +48,6 @@ const Sidebar = ({
     }
   };
 
-  // Close mini dropdown when clicking outside
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (
@@ -111,7 +108,6 @@ const Sidebar = ({
     const handleResize = () => {
       const width = window.innerWidth;
       if (width >= 640 && width < 768 && isSidebarExpanded) {
-        // Auto-collapse sidebar on medium screens
         setIsSidebarExpanded(false);
       }
     };
@@ -335,8 +331,6 @@ const Sidebar = ({
 
                 {/* Mobile dropdown */}
                 {showMiniDropdown && (
-                  // <div className="absolute bottom-full mb-2 left-1/2 transform -translate-x-1/2 bg-gray-800 rounded-md shadow-lg border border-gray-700 w-48 z-50">
-                  // Change the mobile dropdown positioning (around line 249)
 <div className="absolute bottom-full left-0 right-0 mb-2 mx-auto bg-gray-800 rounded-md shadow-lg border border-gray-700 w-48 z-50" style={{maxWidth: "90vw", margin: "0 auto"}}>
                     <div className="py-2">
                       {academicItems.map((item) => (

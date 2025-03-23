@@ -14,34 +14,24 @@ function Login() {
   const [error, setError] = useState("");
   const router = useRouter();
 
-  const handleSubmit = async (e: { preventDefault: () => void; }) => {
+  const handleSubmit = async (e: { preventDefault: () => void }) => {
     e.preventDefault();
     setIsLoading(true);
     setError("");
 
     try {
       const response = await fetch("/api/v1/log/login", {
-        // const response = await fetch("https://edubridge-uwk9.onrender.com/api/v1/log/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, password })
+        body: JSON.stringify({ email, password }),
       });
 
-      // const data = await response.json();
-//       const data = await response.json();
-// console.log("Login response data:", data);
-
-
-const data = await response.json();
-// console.log("Login response data:", JSON.stringify(data, null, 2));
-
-
+      const data = await response.json();
 
       if (!response.ok) {
         throw new Error(data.message || "Login failed");
       }
 
-      // Store token in localStorage
       localStorage.setItem("token", data.data.token);
 
       if (data.user && data.user.id) {
@@ -55,17 +45,14 @@ const data = await response.json();
       } else if (data.data && data.data.user && data.data.user.id) {
         localStorage.setItem("userId", data.data.user.id);
       } else {
-        // Log more info to see the exact structure
-        // console.error("User ID not found in response:", JSON.stringify(data, null, 2));
       }
 
-      const tokenPayload = JSON.parse(atob(data.data.token.split('.')[1]));
-localStorage.setItem("userId", tokenPayload.id);
-      
-      // Redirect to dashboard
+      const tokenPayload = JSON.parse(atob(data.data.token.split(".")[1]));
+      localStorage.setItem("userId", tokenPayload.id);
+
       router.push("/dashboard");
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'An error occurred');
+      setError(err instanceof Error ? err.message : "An error occurred");
     } finally {
       setIsLoading(false);
     }
@@ -97,10 +84,15 @@ localStorage.setItem("userId", tokenPayload.id);
           <div className="flex items-center justify-center h-full px-6 md:px-12">
             <div className="w-full max-w-md bg-[#D1D5DB] p-8 shadow-lg rounded-md">
               <form onSubmit={handleSubmit}>
-                <h2 className="text-3xl text-gray-800 font-bold">Welcome back</h2>
-                
+                <h2 className="text-3xl text-gray-800 font-bold">
+                  Welcome back
+                </h2>
+
                 {error && (
-                  <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mt-4" role="alert">
+                  <div
+                    className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mt-4"
+                    role="alert"
+                  >
                     <span className="block sm:inline">{error}</span>
                   </div>
                 )}
@@ -152,12 +144,18 @@ localStorage.setItem("userId", tokenPayload.id);
                   </Link>
                 </div>
 
-                <button 
+                <button
                   type="submit"
                   disabled={isLoading}
                   className="flex items-center justify-center px-3 space-x-2 text-white transition duration-500 transform rounded-md shadow-sm hover:shadow-md bg-[#82239d] hover:bg-[#89CFF0] hover:text-black py-3 mt-5 w-full font-medium"
                 >
-                  {isLoading ? (<><Loader2 className="animate-spin mr-2"/> Signing in...</>) : "Sign in"}
+                  {isLoading ? (
+                    <>
+                      <Loader2 className="animate-spin mr-2" /> Signing in...
+                    </>
+                  ) : (
+                    "Sign in"
+                  )}
                 </button>
               </form>
 
@@ -167,7 +165,7 @@ localStorage.setItem("userId", tokenPayload.id);
                   href="/signup"
                   className="text-indigo-600 hover:text-indigo-900 font-semibold ml-1"
                 >
-                  Sign Up 
+                  Sign Up
                 </Link>
               </section>
             </div>

@@ -40,7 +40,7 @@ export default function DashboardLayout({
         />
       </div>
 
-      <div className={`flex-1 p-4 bg-[#D1D5DB] ${isMobile ? "pb-24" : ""}`}>
+      <div className={`flex-1 p-4 bg-[#D1D5DB] overflow-y-auto ${isMobile ? "pb-24" : ""}`}>
         {children}
       </div>
 

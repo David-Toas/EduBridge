@@ -8,7 +8,7 @@ interface ErrorFallbackProps {
   error: Error;
 }
 
-export function ErrorFallback({ error }: ErrorFallbackProps) {
+function ErrorFallback({ error }: ErrorFallbackProps) {
   return (
     <div className="text-red-500 p-4">
       <p>Something went wrong:</p>

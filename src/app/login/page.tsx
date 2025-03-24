@@ -49,6 +49,7 @@ function Login() {
 
       const tokenPayload = JSON.parse(atob(data.data.token.split(".")[1]));
       localStorage.setItem("userId", tokenPayload.id);
+      localStorage.setItem("userRole", tokenPayload.role);
 
       router.push("/dashboard");
     } catch (err) {

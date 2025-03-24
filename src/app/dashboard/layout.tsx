@@ -26,11 +26,12 @@ export default function DashboardLayout({
   }, []);
 
   return (
-    <div className="flex h-screen relative">
+    <div className="flex h-full relative">
       <div
         className={`transition-all duration-300  text-white ${
           isMobile ? "hidden" : isSidebarExpanded ? "w-64" : "w-16"
         }`}
+        style={{ position: "sticky", top: 0, height: "100vh" }}
       >
         <Sidebar
           isSidebarExpanded={isSidebarExpanded}

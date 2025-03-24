@@ -150,7 +150,14 @@ const Dashboard = () => {
       }
 
       if (results[1].status === "fulfilled") {
-        setModules(results[1].value.data.data || []);
+        // Check if data is directly an array or nested inside a data property
+        setModules(
+          Array.isArray(results[1].value.data)
+            ? results[1].value.data
+            : Array.isArray(results[1].value.data.data)
+            ? results[1].value.data.data
+            : []
+        );
       }
 
       if (results[2].status === "fulfilled") {
@@ -375,13 +382,6 @@ const Dashboard = () => {
         </div>
       )}
 
-
-
-
-
-
-      
-
       {/* Courses Section */}
       <h2 className="text-xl font-semibold mt-8">Available Courses</h2>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-4">
@@ -435,6 +435,82 @@ const Dashboard = () => {
                     Enroll Now
                   </button>
                 )}
+              </div>
+            </div>
+          );
+        })}
+      </div>
+
+      {/* Modules Section */}
+      <h2 className="text-xl font-semibold mt-8">Course Modules</h2>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-4">
+        {modules.map((module) => {
+          const course = courses.find((c) => c.id === module.courseId);
+          const moduleLessons = lessons.filter((l) => l.moduleId === module.id);
+
+          return (
+            <div key={module.id} className="p-4 bg-white rounded-lg shadow-md">
+              <h3 className="text-lg font-medium text-gray-800">
+                {module.title}
+              </h3>
+              <p className="text-gray-600 text-sm">{module.description}</p>
+              <div className="flex justify-between mt-2">
+                <p className="text-gray-500 text-xs">
+                  Course: {course ? course.title : "Unknown"}
+                </p>
+                <span className="px-2 py-1 bg-purple-100 text-purple-800 text-xs rounded">
+                  {moduleLessons.length} lessons
+                </span>
+              </div>
+            </div>
+          );
+        })}
+      </div>
+
+      {/* Lessons Section */}
+      <h2 className="text-xl font-semibold mt-8">Available Lessons</h2>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-4">
+        {lessons.map((lesson) => {
+          // eslint-disable-next-line @next/next/no-assign-module-variable
+          const module = modules.find((m) => m.id === lesson.moduleId);
+          const course = module
+            ? courses.find((c) => c.id === module.courseId)
+            : null;
+
+          return (
+            <div key={lesson.id} className="p-4 bg-white rounded-lg shadow-md">
+              <h3 className="text-lg font-medium text-gray-800">
+                {lesson.title}
+              </h3>
+              <p className="text-gray-600 text-sm">
+                {lesson.content.substring(0, 100)}...
+              </p>
+              <div className="flex justify-between mt-2">
+                <p className="text-gray-500 text-xs">
+                  Duration: {lesson.duration}
+                </p>
+                <div className="flex gap-2">
+                  {module && (
+                    <span className="px-2 py-1 bg-blue-100 text-blue-800 text-xs rounded">
+                      {module.title}
+                    </span>
+                  )}
+                  {course && (
+                    <span className="px-2 py-1 bg-green-100 text-green-800 text-xs rounded">
+                      {course.title}
+                    </span>
+                  )}
+                </div>
+              </div>
+              <div className="mt-4">
+                <a
+                  href={lesson.resourceUrl || "#"}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-blue-600 hover:text-blue-800 text-sm"
+                >
+                  View Resources
+                </a>
               </div>
             </div>
           );

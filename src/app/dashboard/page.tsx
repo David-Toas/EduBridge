@@ -223,9 +223,6 @@ const Dashboard = () => {
 
       // Refresh enrollments data
       fetchData();
-
-      // Show success message
-      // You could add a toast notification here
     } catch (err) {
       console.error("Error enrolling in course:", err);
       // Show error message

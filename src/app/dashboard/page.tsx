@@ -490,7 +490,7 @@ const Dashboard = () => {
                 {lesson.content.substring(0, 100)}...
               </p>
               <div className="flex justify-between mt-2">
-                <p className="text-gray-500 text-xs">
+                <p className="text-gray-500 text-xs capitalize">
                   Category: {lesson.category}
                 </p>
                 <div className="flex gap-2">

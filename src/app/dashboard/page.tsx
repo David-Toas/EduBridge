@@ -250,9 +250,12 @@ const Dashboard = () => {
 
   if (loading) {
     return (
-      <div className="flex items-center justify-center h-full">
-        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-gray-800"></div>
+      <div className="flex items-center justify-center h-screen bg-gray-50">
+      <div className="flex flex-col items-center space-y-4">
+        <div className="animate-pulse w-16 h-16 bg-purple-500 rounded-full"></div>
+        <p className="text-gray-600">Loading Dashboard...</p>
       </div>
+    </div>
     );
   }
   if (error) return <p className="text-center text-red-500 mt-10">{error}</p>;

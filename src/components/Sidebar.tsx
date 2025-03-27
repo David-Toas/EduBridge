@@ -11,6 +11,7 @@ import {
   BookOpen,
   GraduationCap,
   Brain,
+  NotebookPen,
 } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -92,6 +93,11 @@ const Sidebar = ({
       name: "PROFILE",
       href: "/dashboard/profile",
       icon: <User size={20} />,
+    },
+    {
+      name: "EXAM PREP",
+      href: "/dashboard/exam_prep",
+      icon: <NotebookPen size={20} />,
     },
   ];
 

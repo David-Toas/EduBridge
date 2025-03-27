@@ -1,6 +1,13 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
+import { 
+  Book, 
+  Clock, 
+  UserCircle, 
+  FileText,
+  AlertTriangle
+} from "lucide-react";
 
 interface Course {
   id: string;
@@ -11,94 +18,218 @@ interface Course {
   subject: string;
 }
 
-const Page = () => {
+interface Lesson {
+  id: string;
+  moduleId: string;
+  title: string;
+  content: string;
+  resourceUrl: string;
+  duration: string;
+}
+
+interface Module {
+  id: string;
+  courseId: string;
+  title: string;
+  description: string;
+}
+
+const SecondaryCoursesPage: React.FC = () => {
   const [courses, setCourses] = useState<Course[]>([]);
+  const [modules, setModules] = useState<Module[]>([]);
+  const [lessons, setLessons] = useState<Lesson[]>([]);
+  const [selectedCourse, setSelectedCourse] = useState<string | null>(null);
+  const [selectedModule, setSelectedModule] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    fetchCourses();
+    const fetchData = async () => {
+      try {
+        // Fetch Secondary Courses
+        const coursesResponse = await fetch(
+          "https://edubridge-uwk9.onrender.com/api/v1/course/secondary"
+        );
+        
+        if (!coursesResponse.ok) {
+          throw new Error(`Failed to fetch courses: ${coursesResponse.status}`);
+        }
+        
+        const coursesData = await coursesResponse.json();
+        setCourses(Array.isArray(coursesData?.data) ? coursesData.data : []);
+
+        // Fetch Modules
+        const modulesResponse = await fetch(
+          "https://edubridge-uwk9.onrender.com/api/v1/module/all"
+        );
+        
+        if (!modulesResponse.ok) {
+          throw new Error(`Failed to fetch modules: ${modulesResponse.status}`);
+        }
+        
+        const modulesData = await modulesResponse.json();
+        setModules(Array.isArray(modulesData?.data) ? modulesData.data : []);
+
+        // Fetch Lessons
+        const lessonsResponse = await fetch(
+          "https://edubridge-uwk9.onrender.com/api/v1/lesson/all"
+        );
+        
+        if (!lessonsResponse.ok) {
+          throw new Error(`Failed to fetch lessons: ${lessonsResponse.status}`);
+        }
+        
+        const lessonsData = await lessonsResponse.json();
+        setLessons(Array.isArray(lessonsData?.data) ? lessonsData.data : []);
+
+        setLoading(false);
+      } catch (err) {
+        const errorMessage = err instanceof Error ? err.message : "Failed to fetch data";
+        setError(errorMessage);
+        setLoading(false);
+      }
+    };
+
+    fetchData();
   }, []);
 
-  const fetchCourses = async () => {
-    setLoading(true);
-    try {
-      const url =
-  "https://edubridge-uwk9.onrender.com/api/v1/course/all?category=curriculum";
-
-      const response = await fetch(url);
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
-      const data = await response.json();
-
-      if (Array.isArray(data)) {
-        setCourses(data);
-      } else if (data.data && Array.isArray(data.data)) {
-        setCourses(data.data);
-      } else if (data.courses && Array.isArray(data.courses)) {
-        setCourses(data.courses);
-      } else {
-        console.error("Unexpected API response format:", data);
-        setCourses([]);
-      }
-    } catch (err: unknown) {
-      setError(err instanceof Error ? err.message : "An error occurred");
-    } finally {
-      setLoading(false);
-    }
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const getCourseLessons = (courseId: string) => {
+    const courseModules = modules.filter((module) => module.courseId === courseId);
+    return lessons.filter((lesson) =>
+      courseModules.some((module) => module.id === lesson.moduleId)
+    );
   };
 
-  if (loading)
+  const getModuleLessons = (moduleId: string) => {
+    return lessons.filter((lesson) => lesson.moduleId === moduleId);
+  };
+
+  if (loading) {
     return (
       <div className="flex justify-center items-center h-screen">
-        Loading...
+        <div className="animate-spin">
+          <UserCircle size={64} className="text-blue-500" />
+        </div>
       </div>
     );
-  if (error)
+  }
+
+  if (error) {
     return (
       <div className="flex justify-center items-center h-screen text-red-500">
-        Error: {error}
+        <div className="text-center">
+          <AlertTriangle size={64} className="mx-auto mb-4" />
+          <p className="text-xl">{error}</p>
+          <p className="text-sm mt-2">Please try again later</p>
+        </div>
       </div>
     );
+  }
 
   return (
-    <div className="container mx-auto px-4 py-8">
-      <h1 className="text-3xl font-bold mb-6">Curriculum Courses</h1>
-
-      {courses.length === 0 ? (
-        <p className="text-gray-500">No courses found.</p>
-      ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+    <div className="min-h-screen bg-gray-50 flex">
+      {/* Courses Sidebar */}
+      <div className="w-1/4 bg-white shadow-lg p-6 border-r overflow-y-auto">
+        <h1 className="text-2xl font-bold mb-6 text-gray-800">Secondary Courses</h1>
+        <div className="space-y-4">
           {courses.map((course) => (
-            <div
+            <div 
               key={course.id}
-              className="border rounded-lg overflow-hidden shadow-lg"
+              onClick={() => {
+                setSelectedCourse(course.id);
+                setSelectedModule(null);
+              }}
+              className={`
+                cursor-pointer p-4 rounded-lg transition-all duration-300
+                ${selectedCourse === course.id 
+                  ? 'bg-blue-50 border-blue-500 border' 
+                  : 'hover:bg-gray-100'}
+              `}
             >
-              <div className="p-6">
-                <h2 className="text-xl font-semibold mb-2">{course.title}</h2>
-                <p className="text-gray-600 mb-4">{course.description}</p>
-                <div className="text-sm">
-                  <p className="mb-1">
-                    <span className="font-medium">Instructor:</span>{" "}
-                    {course.instructor}
-                  </p>
-                  <p className="mb-1">
-                    <span className="font-medium">Category:</span>{" "}
-                    {course.category}
-                  </p>
-                  <p className="mb-1">
-                    <span className="font-medium">Subject:</span>{" "}
-                    {course.subject}
-                  </p>
-                </div>
-              </div>
+              <h2 className="font-semibold text-lg text-gray-800">{course.title}</h2>
+              <p className="text-sm text-gray-500 mt-1">{course.instructor}</p>
             </div>
           ))}
         </div>
-      )}
+      </div>
+
+      {/* Modules Section */}
+      <div className="w-1/4 bg-gray-100 p-6 border-r overflow-y-auto">
+        {selectedCourse && (
+          <div>
+            <h2 className="text-xl font-bold mb-4 text-gray-800">Modules</h2>
+            <div className="space-y-3">
+              {modules
+                .filter((module) => module.courseId === selectedCourse)
+                .map((module) => (
+                  <div 
+                    key={module.id}
+                    onClick={() => setSelectedModule(module.id)}
+                    className={`
+                      cursor-pointer p-4 rounded-lg transition-all duration-300
+                      ${selectedModule === module.id 
+                        ? 'bg-green-50 border-green-500 border' 
+                        : 'hover:bg-gray-200'}
+                    `}
+                  >
+                    <h3 className="font-semibold text-gray-800">{module.title}</h3>
+                    <p className="text-sm text-gray-500">{module.description}</p>
+                  </div>
+                ))}
+            </div>
+          </div>
+        )}
+      </div>
+
+      {/* Lesson Details */}
+      <div className="w-1/2 p-6 overflow-y-auto">
+        {selectedModule && (
+          <div>
+            <h2 className="text-2xl font-bold mb-6 text-gray-800">Lessons</h2>
+            <div className="space-y-4">
+              {getModuleLessons(selectedModule).map((lesson) => (
+                <div 
+                  key={lesson.id} 
+                  className="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-all"
+                >
+                  <div className="flex items-center mb-4">
+                    <Book className="mr-3 text-blue-600" size={24} />
+                    <h3 className="text-lg font-semibold text-gray-800">{lesson.title}</h3>
+                  </div>
+                  <p className="text-gray-600 mb-4">{lesson.content}</p>
+                  <div className="flex justify-between items-center text-sm text-gray-500">
+                    <div className="flex items-center">
+                      <Clock className="mr-2 text-green-600" size={16} />
+                      <span>{lesson.duration || 'Not specified'}</span>
+                    </div>
+                    {lesson.resourceUrl && (
+                      <a 
+                        href={lesson.resourceUrl} 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        className="text-blue-600 hover:underline flex items-center"
+                      >
+                        <FileText className="mr-2" size={16} />
+                        View Resources
+                      </a>
+                    )}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {!selectedModule && (
+          <div className="flex flex-col items-center justify-center h-full text-center text-gray-500">
+            <UserCircle size={64} className="mb-4 text-gray-300" />
+            <p className="text-xl">Select a course and module to view lessons</p>
+          </div>
+        )}
+      </div>
     </div>
   );
 };
 
-export default Page;
+export default SecondaryCoursesPage;

@@ -48,18 +48,18 @@
 //   const updateUserRole = async (userId: string, newRole: string): Promise<void> => {
 //     const token = localStorage.getItem("token");
 //     const authHeader = token ? { Authorization: `Bearer ${token}` } : {};
-    
+
 //     try {
 //       await axios.put(
 //         `${baseURL}/user/update/?id=${userId}`,
 //         { role: newRole },
 //         { headers: authHeader }
 //       );
-      
+
 //       // Update local state
 //       handleRoleChange(userId, newRole);
 //       showNotification("User role updated successfully", "success");
-      
+
 //     } catch (err) {
 //       console.error("Error updating user role:", err);
 //       showNotification("Failed to update user role", "error");
@@ -326,8 +326,6 @@
 
 // export default AdminDashboard;
 
-
-
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
@@ -340,7 +338,6 @@ import { useRouter } from "next/navigation";
 import type { Course, Module, Lesson, User, Enrollment } from "../../lib/types";
 import StatCard from "@/components/common/StatCard";
 import NotificationAlert from "@/components/common/NotificationAlert";
-import LoadingSpinner from "@/components/common/LoadingSpinner";
 import CoursesTab from "@/components/tabs/CoursesTab";
 import ModulesTab from "@/components/tabs/ModulesTab";
 import LessonsTab from "@/components/tabs/LessonsTab";
@@ -367,31 +364,27 @@ const AdminDashboard = () => {
 
   const baseURL = "https://edubridge-uwk9.onrender.com/api/v1";
 
-
-// delete user
+  // delete user
   const deleteUser = async (userId: string): Promise<void> => {
     const token = localStorage.getItem("token");
     const authHeader = token ? { Authorization: `Bearer ${token}` } : {};
-    
+
     try {
-      await axios.delete(
-        `${baseURL}/user/delete/${userId}`,
-        { headers: authHeader }
-      );
-      
+      await axios.delete(`${baseURL}/user/delete/${userId}`, {
+        headers: authHeader,
+      });
+
       // Update local state by removing the deleted user
-      setUsers(prevUsers => prevUsers.filter(user => user.id !== userId));
+      setUsers((prevUsers) => prevUsers.filter((user) => user.id !== userId));
       showNotification("User deleted successfully", "success");
-      
     } catch (err) {
       console.error("Error deleting user:", err);
       showNotification(
-        err instanceof Error ? err.message : "Failed to delete user", 
+        err instanceof Error ? err.message : "Failed to delete user",
         "error"
       );
     }
   };
-  
 
   // Check user role on component mount
   useEffect(() => {
@@ -413,45 +406,47 @@ const AdminDashboard = () => {
     setIsAdmin(true);
     fetchData();
   }, [router]);
-// role change
+  // role change
   const handleRoleChange = (userId: string, newRole: string) => {
     setUsers((prevUsers) =>
       prevUsers.map((u) => (u.id === userId ? { ...u, role: newRole } : u))
     );
   };
-// update users role
-  const updateUserRole = async (userId: string, newRole: string): Promise<void> => {
+  // update users role
+  const updateUserRole = async (
+    userId: string,
+    newRole: string
+  ): Promise<void> => {
     const token = localStorage.getItem("token");
     const authHeader = token ? { Authorization: `Bearer ${token}` } : {};
-    
+
     try {
-      const userToUpdate = users.find(user => user.id === userId);
+      const userToUpdate = users.find((user) => user.id === userId);
       if (!userToUpdate) {
         throw new Error("User not found");
       }
       await axios.put(
         `${baseURL}/user/update/?id=${userId}`,
-        { 
+        {
           ...userToUpdate,
-          role: newRole  
+          role: newRole,
         },
         { headers: authHeader }
       );
-      
+
       // Update local state
       handleRoleChange(userId, newRole);
       showNotification("User role updated successfully", "success");
-      
     } catch (err) {
       console.error("Error updating user role:", err);
       showNotification(
-        err instanceof Error ? err.message : "Failed to update user role", 
+        err instanceof Error ? err.message : "Failed to update user role",
         "error"
       );
     }
   };
 
-// show notifications
+  // show notifications
   const showNotification = (
     message: string,
     type: "success" | "error"
@@ -469,7 +464,7 @@ const AdminDashboard = () => {
       });
     }, 3000);
   };
-// fetch data from api
+  // fetch data from api
   const fetchData = async () => {
     const token = localStorage.getItem("token");
     const authHeader = token ? { Authorization: `Bearer ${token}` } : {};
@@ -543,16 +538,26 @@ const AdminDashboard = () => {
   };
 
   if (loading) {
-    return <LoadingSpinner />;
+    return (
+      <div className="flex items-center justify-center h-screen bg-gray-50">
+        <div className="flex flex-col items-center space-y-4">
+          <div className="animate-pulse w-16 h-16 bg-purple-500 rounded-full"></div>
+          <p className="text-gray-600">Loading Admin Dashboard...</p>
+        </div>
+      </div>
+    );
   }
 
   if (accessDenied) {
     return (
       <div className="flex items-center justify-center min-h-screen bg-gray-100">
         <div className="bg-white p-8 rounded-lg shadow-md max-w-md w-full text-center">
-          <h2 className="text-2xl font-bold text-red-600 mb-4">Access Denied</h2>
+          <h2 className="text-2xl font-bold text-red-600 mb-4">
+            Access Denied
+          </h2>
           <p className="text-gray-700 mb-6">
-            You don&rsquo;t have permission to access this page. Only administrators can view the admin dashboard.
+            You don&rsquo;t have permission to access this page. Only
+            administrators can view the admin dashboard.
           </p>
           <button
             onClick={() => router.push("/")}
@@ -570,7 +575,7 @@ const AdminDashboard = () => {
   }
 
   if (!isAdmin) {
-    return null; 
+    return null;
   }
 
   return (

@@ -56,7 +56,8 @@ const Dashboard = () => {
     title: string;
     content: string;
     resourceUrl: string;
-    duration: string;
+    // duration: string;
+    category: string;
   }
 
   interface Enrollment {
@@ -490,7 +491,7 @@ const Dashboard = () => {
               </p>
               <div className="flex justify-between mt-2">
                 <p className="text-gray-500 text-xs">
-                  Duration: {lesson.duration}
+                  Category: {lesson.category}
                 </p>
                 <div className="flex gap-2">
                   {module && (

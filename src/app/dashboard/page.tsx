@@ -386,7 +386,7 @@ const Dashboard = () => {
       )}
 
       {/* Courses Section */}
-      <h2 className="text-xl font-semibold mt-8">Available Courses</h2>
+      {/* <h2 className="text-xl font-semibold mt-8">Available Courses</h2>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-4">
         {courses.map((course) => {
           const isEnrolled = userEnrollments.some(
@@ -442,10 +442,10 @@ const Dashboard = () => {
             </div>
           );
         })}
-      </div>
+      </div> */}
 
       {/* Modules Section */}
-      <h2 className="text-xl font-semibold mt-8">Course Modules</h2>
+      {/* <h2 className="text-xl font-semibold mt-8">Course Modules</h2>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-4">
         {modules.map((module) => {
           const course = courses.find((c) => c.id === module.courseId);
@@ -468,7 +468,7 @@ const Dashboard = () => {
             </div>
           );
         })}
-      </div>
+      </div> */}
 
       {/* Lessons Section */}
       <h2 className="text-xl font-semibold mt-8">Available Lessons</h2>

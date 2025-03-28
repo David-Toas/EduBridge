@@ -18,6 +18,7 @@ const Dashboard = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const [user, setUser] = useState<User | null>(null);
+  const [selectedLessonCategory, setSelectedLessonCategory] = useState<string>("");
 
   const baseURL = "https://edubridge-uwk9.onrender.com/api/v1";
 
@@ -271,6 +272,26 @@ const Dashboard = () => {
     new Set(courses.map((course) => course.category))
   ).filter(Boolean);
 
+
+
+  const uniqueLessonCategories = Array.from(
+    new Set(lessons.map((lesson) => lesson.category))
+  ).filter(Boolean);
+
+  const filteredLessons = selectedLessonCategory
+    ? lessons.filter((lesson) => lesson.category === selectedLessonCategory)
+    : lessons;
+
+  const handleLessonCategoryChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setSelectedLessonCategory(e.target.value);
+  };
+
+  const resetLessonFilters = () => {
+    setSelectedLessonCategory("");
+  };
+
+
+
   return (
     <div className="p-6 bg-gray-100 min-h-full rounded-lg">
       <div className="mb-6">
@@ -311,7 +332,7 @@ const Dashboard = () => {
       </div>
 
       {/* Filters Section */}
-      <div className="mt-8 bg-white p-4 rounded-lg shadow">
+      {/* <div className="mt-8 bg-white p-4 rounded-lg shadow">
         <h2 className="text-lg font-semibold mb-4">Filter Courses</h2>
         <div className="flex flex-wrap gap-4">
           <div className="w-full md:w-1/4">
@@ -357,7 +378,7 @@ const Dashboard = () => {
             </button>
           </div>
         </div>
-      </div>
+      </div> */}
 
       {/* My Enrollments Section */}
       {user && userEnrollments.length > 0 && (
@@ -472,7 +493,7 @@ const Dashboard = () => {
       </div> */}
 
       {/* Lessons Section */}
-      <h2 className="text-xl font-semibold mt-8">Available Lessons</h2>
+      {/* <h2 className="text-xl font-semibold mt-8">Available Lessons</h2>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-4">
         {lessons.map((lesson) => {
           // eslint-disable-next-line @next/next/no-assign-module-variable
@@ -519,7 +540,87 @@ const Dashboard = () => {
             </div>
           );
         })}
+      </div> */}
+
+
+
+{/* Lessons Section */}
+<div className="mt-8">
+    <div className="flex justify-between items-center mb-4">
+      <h2 className="text-xl font-semibold">Available Lessons</h2>
+      <div className="flex items-center gap-4">
+        <select
+          value={selectedLessonCategory}
+          onChange={handleLessonCategoryChange}
+          className="p-2 border border-gray-300 rounded-md text-sm capitalize"
+        >
+          <option value="">All Categories</option>
+          {uniqueLessonCategories.map((category) => (
+            <option key={category} value={category} className="capitalize">
+              {category}
+            </option>
+          ))}
+        </select>
+        {selectedLessonCategory && (
+          <button
+            onClick={resetLessonFilters}
+            className="px-3 py-1 bg-gray-200 text-gray-700 rounded-md text-sm hover:bg-gray-300"
+          >
+            Reset
+          </button>
+        )}
       </div>
+    </div>
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+      {filteredLessons.map((lesson) => {
+        // eslint-disable-next-line @next/next/no-assign-module-variable
+        const module = modules.find((m) => m.id === lesson.moduleId);
+        const course = module
+          ? courses.find((c) => c.id === module.courseId)
+          : null;
+
+        return (
+          <div key={lesson.id} className="p-4 bg-white rounded-lg shadow-md">
+            <h3 className="text-lg font-medium text-gray-800">
+              {lesson.title}
+            </h3>
+            <p className="text-gray-600 text-sm">
+              {lesson.content.substring(0, 100)}...
+            </p>
+            <div className="flex justify-between mt-2">
+              <p className="text-gray-500 text-xs capitalize">
+                Category: {lesson.category}
+              </p>
+              <div className="flex gap-2">
+                {module && (
+                  <span className="px-2 py-1 bg-blue-100 text-blue-800 text-xs rounded">
+                    {module.title}
+                  </span>
+                )}
+                {course && (
+                  <span className="px-2 py-1 bg-green-100 text-green-800 text-xs rounded">
+                    {course.title}
+                  </span>
+                )}
+              </div>
+            </div>
+            <div className="mt-4">
+              <a
+                href={lesson.resourceUrl || "#"}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-blue-600 hover:text-blue-800 text-sm"
+              >
+                View Resources
+              </a>
+            </div>
+          </div>
+        );
+      })}
+    </div>
+  </div>
+
+
     </div>
   );
 };

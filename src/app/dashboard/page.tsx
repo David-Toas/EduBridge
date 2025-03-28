@@ -305,30 +305,30 @@ const Dashboard = () => {
 
       {/* Statistics Section */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-6">
-        <StatCard
+        {/* <StatCard
           title="Courses"
           value={courses.length}
           icon={BookOpen}
           color="bg-blue-500"
-        />
-        <StatCard
+        /> */}
+        {/* <StatCard
           title="Modules"
           value={modules.length}
           icon={Layers}
           color="bg-green-500"
-        />
+        /> */}
         <StatCard
           title="Lessons"
           value={lessons.length}
           icon={FileText}
           color="bg-purple-500"
         />
-        <StatCard
+        {/* <StatCard
           title="Users"
           value={users.length}
           icon={Users}
           color="bg-orange-500"
-        />
+        /> */}
       </div>
 
       {/* Filters Section */}

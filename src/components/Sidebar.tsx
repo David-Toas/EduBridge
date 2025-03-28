@@ -24,11 +24,6 @@ interface SidebarProps {
   isMobile: boolean;
 }
 
-// const Sidebar = ({
-//   isSidebarExpanded,
-//   setIsSidebarExpanded,
-//   isMobile,
-// }: SidebarProps) => {
 const Sidebar = ({
   isSidebarExpanded,
   setIsSidebarExpanded,
@@ -99,11 +94,6 @@ const Sidebar = ({
       href: "/dashboard/profile",
       icon: <User size={20} />,
     },
-    // {
-    //   name: "EXAM PREP",
-    //   href: "/dashboard/exam_prep",
-    //   icon: <NotebookPen size={20} />,
-    // },
   ];
 
   const examPrepItem = {
@@ -134,7 +124,6 @@ const Sidebar = ({
 
   return (
     <>
-      {/* existing content */}
       {/* Desktop/Tablet sidebar */}
       <div
         className={`flex flex-col h-full ${
@@ -159,7 +148,6 @@ const Sidebar = ({
                 isSidebarExpanded ? "mt-2" : "mt-4"
               }`}
             >
-              {/* logo */}
               <div
                 className={`bg-gray-700 rounded-full overflow-hidden ${
                   isSidebarExpanded ? "w-24 h-24" : "w-10 h-10"
@@ -178,7 +166,6 @@ const Sidebar = ({
             <div className="border-t border-[#FACC15] mx-3 mb-6" />
 
             {/* Sidebar content */}
-
             <div className="flex-grow">
               <nav>
                 <ul className="space-y-3">
@@ -397,6 +384,21 @@ const Sidebar = ({
                     </div>
                   </div>
                 )}
+              </li>
+
+              {/* Exam Prep link (added to mobile navigation) */}
+              <li>
+                <Link
+                  href="/dashboard/exam_prep"
+                  className={`flex flex-col items-center p-2 rounded-md ${
+                    pathname === "/dashboard/exam_prep"
+                      ? "text-blue-500"
+                      : "text-gray-400 hover:text-white"
+                  }`}
+                >
+                  <NotebookPen size={24} />
+                  <span className="text-xs mt-1">EXAM PREP</span>
+                </Link>
               </li>
 
               {/* Profile link */}

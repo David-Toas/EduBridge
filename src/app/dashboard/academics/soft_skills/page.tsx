@@ -2,10 +2,10 @@
 // "use client";
 
 // import React, { useState, useEffect } from "react";
-// import { 
-//   Book, 
-//   Clock, 
-//   UserCircle, 
+// import {
+//   Book,
+//   Clock,
+//   UserCircle,
 //   FileText,
 //   AlertTriangle,
 //   Menu,
@@ -54,11 +54,11 @@
 //         const coursesResponse = await fetch(
 //           "https://edubridge-uwk9.onrender.com/api/v1/course/soft-skills"
 //         );
-        
+
 //         if (!coursesResponse.ok) {
 //           throw new Error(`Failed to fetch courses: ${coursesResponse.status}`);
 //         }
-        
+
 //         const coursesData = await coursesResponse.json();
 //         setCourses(Array.isArray(coursesData?.data) ? coursesData.data : []);
 
@@ -66,11 +66,11 @@
 //         const modulesResponse = await fetch(
 //           "https://edubridge-uwk9.onrender.com/api/v1/module/all"
 //         );
-        
+
 //         if (!modulesResponse.ok) {
 //           throw new Error(`Failed to fetch modules: ${modulesResponse.status}`);
 //         }
-        
+
 //         const modulesData = await modulesResponse.json();
 //         setModules(Array.isArray(modulesData?.data) ? modulesData.data : []);
 
@@ -78,11 +78,11 @@
 //         const lessonsResponse = await fetch(
 //           "https://edubridge-uwk9.onrender.com/api/v1/lesson/all"
 //         );
-        
+
 //         if (!lessonsResponse.ok) {
 //           throw new Error(`Failed to fetch lessons: ${lessonsResponse.status}`);
 //         }
-        
+
 //         const lessonsData = await lessonsResponse.json();
 //         setLessons(Array.isArray(lessonsData?.data) ? lessonsData.data : []);
 
@@ -128,7 +128,7 @@
 //           <AlertTriangle size={64} className="mx-auto mb-4 text-red-500" />
 //           <p className="text-2xl font-bold mb-2">Oops! Something went wrong</p>
 //           <p className="text-lg">{error}</p>
-//           <button 
+//           <button
 //             onClick={() => window.location.reload()}
 //             className="mt-4 px-6 py-2 bg-red-500 text-white rounded-full hover:bg-red-600 transition-colors"
 //           >
@@ -144,7 +144,7 @@
 //       {/* Mobile Navigation */}
 //       <div className="lg:hidden bg-white shadow-md p-4 flex justify-between items-center z-50">
 //         <h1 className="text-2xl font-bold text-gray-800">Soft Skills Courses</h1>
-//         <button 
+//         <button
 //           onClick={toggleMobileMenu}
 //           className="text-blue-600 hover:text-blue-800"
 //         >
@@ -154,18 +154,18 @@
 
 //       {/* Mobile Overlay Menu */}
 //       {isMobileMenuOpen && (
-//         <div 
+//         <div
 //           className="fixed inset-0 bg-black bg-opacity-50 z-40 lg:hidden"
 //           onClick={toggleMobileMenu}
 //         >
-//           <div 
+//           <div
 //             className="w-3/4 bg-white h-full p-6 overflow-y-auto shadow-lg"
 //             onClick={(e) => e.stopPropagation()}
 //           >
 //             <h2 className="text-2xl font-bold mb-6 text-gray-800">Courses</h2>
 //             <div className="space-y-4">
 //               {courses.map((course) => (
-//                 <div 
+//                 <div
 //                   key={course.id}
 //                   onClick={() => selectCourseAndCloseMenu(course.id)}
 //                   className="cursor-pointer p-4 rounded-lg hover:bg-blue-50 transition-colors"
@@ -187,19 +187,19 @@
 //             <h1 className="text-2xl font-bold mb-6 text-gray-800">Soft Skills</h1>
 //             <div className="space-y-4">
 //               {courses.map((course) => (
-//                 <div 
+//                 <div
 //                   key={course.id}
 //                   onClick={() => setSelectedCourse(course.id)}
 //                   className={`
 //                     cursor-pointer p-4 rounded-lg transition-all duration-300
-//                     ${selectedCourse === course.id 
-//                       ? 'bg-blue-50 border-blue-500 border' 
+//                     ${selectedCourse === course.id
+//                       ? 'bg-blue-50 border-blue-500 border'
 //                       : 'hover:bg-gray-100'}
 //                     group
 //                   `}
 //                 >
 //                   <h2 className={`
-//                     font-semibold text-lg 
+//                     font-semibold text-lg
 //                     ${selectedCourse === course.id ? 'text-blue-600' : 'text-gray-800'}
 //                     group-hover:text-blue-600
 //                   `}>{course.title}</h2>
@@ -219,19 +219,19 @@
 //                 {modules
 //                   .filter((module) => module.courseId === selectedCourse)
 //                   .map((module) => (
-//                     <div 
+//                     <div
 //                       key={module.id}
 //                       onClick={() => setSelectedModule(module.id)}
 //                       className={`
 //                         cursor-pointer p-4 rounded-lg transition-all duration-300
-//                         ${selectedModule === module.id 
-//                           ? 'bg-green-50 border-green-500 border' 
+//                         ${selectedModule === module.id
+//                           ? 'bg-green-50 border-green-500 border'
 //                           : 'hover:bg-gray-200'}
 //                         group
 //                       `}
 //                     >
 //                       <h3 className={`
-//                         font-semibold 
+//                         font-semibold
 //                         ${selectedModule === module.id ? 'text-green-600' : 'text-gray-800'}
 //                         group-hover:text-green-600
 //                       `}>{module.title}</h3>
@@ -256,8 +256,8 @@
 //               <h2 className="text-2xl font-bold mb-6 text-gray-800">Lessons</h2>
 //               <div className="space-y-4">
 //                 {getModuleLessons(selectedModule).map((lesson) => (
-//                   <div 
-//                     key={lesson.id} 
+//                   <div
+//                     key={lesson.id}
 //                     className="bg-white rounded-xl shadow-md hover:shadow-lg transition-all p-6"
 //                   >
 //                     <div className="flex items-center mb-4">
@@ -271,9 +271,9 @@
 //                         <span>{lesson.duration || 'Not specified'}</span>
 //                       </div>
 //                       {lesson.resourceUrl && (
-//                         <a 
-//                           href={lesson.resourceUrl} 
-//                           target="_blank" 
+//                         <a
+//                           href={lesson.resourceUrl}
+//                           target="_blank"
 //                           rel="noopener noreferrer"
 //                           className="text-blue-600 hover:underline flex items-center"
 //                         >
@@ -302,20 +302,13 @@
 
 // export default SecondaryCoursesPage;
 
-
-
-
-
-
-
-
 // "use client";
 
 // import React, { useState, useEffect } from "react";
-// import { 
-//   Book, 
-//   Clock, 
-//   UserCircle, 
+// import {
+//   Book,
+//   Clock,
+//   UserCircle,
 //   FileText,
 //   AlertTriangle
 // } from "lucide-react";
@@ -346,7 +339,7 @@
 //         const allLessons: Lesson[] = lessonsResponse.data.data;
 
 //         // Filter only primary category lessons
-//         const primaryLessons = allLessons.filter(lesson => 
+//         const primaryLessons = allLessons.filter(lesson =>
 //           lesson.category === 'soft-skills'
 //         );
 
@@ -391,13 +384,13 @@
 //         <h1 className="text-2xl font-bold mb-6 text-gray-800">Soft Skills</h1>
 //         <div className="space-y-4">
 //           {lessons.map((lesson) => (
-//             <div 
+//             <div
 //               key={lesson.id}
 //               onClick={() => setSelectedLesson(lesson)}
 //               className={`
 //                 cursor-pointer p-4 rounded-lg transition-all duration-300
-//                 ${selectedLesson?.id === lesson.id 
-//                   ? 'bg-blue-50 border-blue-500 border' 
+//                 ${selectedLesson?.id === lesson.id
+//                   ? 'bg-blue-50 border-blue-500 border'
 //                   : 'hover:bg-gray-100'}
 //               `}
 //             >
@@ -426,9 +419,9 @@
 //                 </span>
 //               </div>
 //               {selectedLesson.resourceUrl && (
-//                 <a 
-//                   href={selectedLesson.resourceUrl} 
-//                   target="_blank" 
+//                 <a
+//                   href={selectedLesson.resourceUrl}
+//                   target="_blank"
 //                   rel="noopener noreferrer"
 //                   className="text-blue-600 hover:underline flex items-center text-base"
 //                 >
@@ -451,23 +444,19 @@
 
 // export default PrimaryLessonsPage;
 
-
-
-
-
-
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { 
-  Book, 
-  Clock, 
-  // UserCircle, 
+import {
+  Book,
+  Clock,
   FileText,
   AlertTriangle,
-  Loader2
+  Loader2,
+  ChevronLeft,
+  ChevronRight,
 } from "lucide-react";
-import axios from 'axios';
+import axios from "axios";
 
 interface Lesson {
   id: string;
@@ -487,53 +476,84 @@ interface Module {
 
 const SoftSkillsLessonsPage: React.FC = () => {
   const [lessons, setLessons] = useState<Lesson[]>([]);
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [modules, setModules] = useState<Module[]>([]);
   const [selectedLesson, setSelectedLesson] = useState<Lesson | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [isMobileSidebarOpen, setIsMobileSidebarOpen] = useState(false);
 
   useEffect(() => {
     const fetchSoftSkillsLessons = async () => {
       try {
-        const BASE_URL = 'https://edubridge-uwk9.onrender.com/api/v1';
+        const BASE_URL = "https://edubridge-uwk9.onrender.com/api/v1";
 
         // Fetch all lessons and modules in parallel
         const [lessonsResponse, modulesResponse] = await Promise.all([
           axios.get(`${BASE_URL}/lesson/all`),
-          axios.get(`${BASE_URL}/module/all`)
+          axios.get(`${BASE_URL}/module/all`),
         ]);
 
         // Ensure we always have arrays, even if the response structure is different
-        const allLessons: Lesson[] = Array.isArray(lessonsResponse.data?.data) 
-          ? lessonsResponse.data.data 
+        const allLessons: Lesson[] = Array.isArray(lessonsResponse.data?.data)
+          ? lessonsResponse.data.data
           : [];
-        
-        const allModules: Module[] = Array.isArray(modulesResponse.data?.data) 
-          ? modulesResponse.data.data 
+
+        const allModules: Module[] = Array.isArray(modulesResponse.data?.data)
+          ? modulesResponse.data.data
           : [];
 
         // Filter only soft_skill category lessons (note the underscore)
-        const softSkillsLessons = allLessons.filter(lesson => 
-          lesson.category?.toLowerCase() === 'soft_skill'
+        const softSkillsLessons = allLessons.filter(
+          (lesson) => lesson.category?.toLowerCase() === "soft_skill"
         );
 
         setLessons(softSkillsLessons);
         setModules(allModules);
+
+        // Automatically select the first lesson on mobile
+        if (softSkillsLessons.length > 0 && window.innerWidth < 640) {
+          setSelectedLesson(softSkillsLessons[0]);
+        }
+
         setLoading(false);
       } catch (err) {
-        console.error('Error fetching data:', err);
-        setError(err instanceof Error ? err.message : "Failed to fetch lessons");
+        console.error("Error fetching data:", err);
+        setError(
+          err instanceof Error ? err.message : "Failed to fetch lessons"
+        );
         setLoading(false);
       }
     };
 
     fetchSoftSkillsLessons();
+
+    // Add resize listener to handle sidebar on mobile
+    const handleResize = () => {
+      if (window.innerWidth >= 640) {
+        setIsMobileSidebarOpen(false);
+      }
+    };
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  const getModuleTitle = (moduleId: string) => {
-    if (!Array.isArray(modules)) return 'Unknown Module';
-    const module = modules.find(m => m?.id === moduleId);
-    return module?.title || 'Unknown Module';
+  // const getModuleTitle = (moduleId: string) => {
+  //   if (!Array.isArray(modules)) return "Unknown Module";
+  //   const module = modules.find((m) => m?.id === moduleId);
+  //   return module?.title || "Unknown Module";
+  // };
+
+  const toggleMobileSidebar = () => {
+    setIsMobileSidebarOpen(!isMobileSidebarOpen);
+  };
+
+  const handleLessonSelect = (lesson: Lesson) => {
+    setSelectedLesson(lesson);
+    if (window.innerWidth < 640) {
+      setIsMobileSidebarOpen(false);
+    }
   };
 
   if (loading) {
@@ -557,46 +577,79 @@ const SoftSkillsLessonsPage: React.FC = () => {
   }
 
   return (
-    <div className="min-h-full bg-gray-50 flex">
-      {/* Lessons Sidebar */}
-      <div className="w-1/3 bg-white shadow-lg p-6 border-r overflow-y-auto">
-        <h1 className="text-2xl font-bold mb-6 text-gray-800">Soft Skills Lessons</h1>
+    <div className="h-screen bg-gray-50 flex flex-col sm:flex-row relative">
+      {/* Mobile Sidebar Toggle */}
+      <button
+        onClick={toggleMobileSidebar}
+        className="sm:hidden fixed top-2 left-2 z-50 bg-white shadow-md p-2 rounded-full"
+        aria-label="Toggle Sidebar"
+      >
+        {isMobileSidebarOpen ? (
+          <ChevronLeft size={24} />
+        ) : (
+          <ChevronRight size={24} />
+        )}
+      </button>
+
+      {/* Lessons Sidebar - Mobile & Desktop */}
+      <div
+        className={`
+        fixed inset-0 z-40 w-full sm:w-1/3 bg-white shadow-lg p-6 
+        border-r overflow-y-auto transform transition-transform duration-300 
+        ${isMobileSidebarOpen ? "translate-x-0" : "-translate-x-full"}
+        sm:translate-x-0 sm:relative sm:block
+      `}
+      >
+        <h1 className="text-2xl font-bold mb-6 text-gray-800 flex justify-center items-center">
+          Soft Skills Lessons
+        </h1>
         {lessons.length === 0 ? (
           <p className="text-gray-500">No soft skills lessons available.</p>
         ) : (
           <div className="space-y-4">
             {lessons.map((lesson) => (
-              <div 
+              <div
                 key={lesson.id}
-                onClick={() => setSelectedLesson(lesson)}
+                onClick={() => handleLessonSelect(lesson)}
                 className={`
                   cursor-pointer p-4 rounded-lg transition-all duration-300
-                  ${selectedLesson?.id === lesson.id 
-                    ? 'bg-blue-50 border-blue-500 border' 
-                    : 'hover:bg-gray-100'}
+                  ${
+                    selectedLesson?.id === lesson.id
+                      ? "bg-blue-50 border-blue-500 border"
+                      : "hover:bg-gray-100"
+                  }
                 `}
               >
-                <h2 className="font-semibold text-lg text-gray-800">{lesson.title}</h2>
-                <p className="text-sm text-gray-500 mt-1">
+                <h2 className="font-semibold text-lg text-gray-800">
+                  {lesson.title}
+                </h2>
+                {/* <p className="text-sm text-gray-500 mt-1">
                   {getModuleTitle(lesson.moduleId)}
-                </p>
+                </p> */}
               </div>
             ))}
           </div>
         )}
       </div>
 
-      {/* Lesson Details */}
-      <div className="w-2/3 p-6 overflow-y-auto">
+      {/* Lesson Details - Mobile & Desktop */}
+      <div
+        className={`
+        w-full sm:w-2/3 p-4 sm:p-6 overflow-y-auto 
+        ${isMobileSidebarOpen ? "hidden sm:block" : "block"}
+      `}
+      >
         {selectedLesson ? (
-          <div className="bg-white rounded-lg shadow-md p-8">
+          <div className="bg-white rounded-lg shadow-md p-6 sm:p-8">
             <div className="flex items-center mb-6">
               <Book className="mr-4 text-blue-600" size={32} />
               <div>
-                <h2 className="text-2xl font-bold text-gray-800">{selectedLesson.title}</h2>
-                <p className="text-gray-500 text-sm">
+                <h2 className="text-2xl font-bold text-gray-800">
+                  {selectedLesson.title}
+                </h2>
+                {/* <p className="text-gray-500 text-sm">
                   Module: {getModuleTitle(selectedLesson.moduleId)}
-                </p>
+                </p> */}
               </div>
             </div>
             <div className="prose max-w-none">
@@ -604,17 +657,17 @@ const SoftSkillsLessonsPage: React.FC = () => {
                 {selectedLesson.content}
               </p>
             </div>
-            <div className="flex justify-between items-center text-sm text-gray-500 mt-8">
+            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center text-sm text-gray-500 mt-8 space-y-4 sm:space-y-0">
               <div className="flex items-center">
                 <Clock className="mr-2 text-green-600" size={20} />
                 <span className="text-base">
-                  Duration: {selectedLesson.duration || 'Not specified'}
+                  Duration: {selectedLesson.duration || "Not specified"}
                 </span>
               </div>
               {selectedLesson.resourceUrl && (
-                <a 
-                  href={selectedLesson.resourceUrl} 
-                  target="_blank" 
+                <a
+                  href={selectedLesson.resourceUrl}
+                  target="_blank"
                   rel="noopener noreferrer"
                   className="text-blue-600 hover:underline flex items-center text-base"
                 >
@@ -634,6 +687,14 @@ const SoftSkillsLessonsPage: React.FC = () => {
           </div>
         )}
       </div>
+
+      {/* Mobile Overlay when Sidebar is Open */}
+      {isMobileSidebarOpen && (
+        <div
+          onClick={toggleMobileSidebar}
+          className="fixed inset-0 z-30 bg-black bg-opacity-50 sm:hidden"
+        />
+      )}
     </div>
   );
 };
